@@ -4,17 +4,28 @@ use super::function_definition::FunctionDefinition;
 use super::instruction::Instruction;
 use super::variable_declaration::VariableDeclaration;
 use super::variable_definition::VariableDefinition;
-use crate::types::{self, Type};
+use crate::types::{FunctionType, Type};
 
 #[derive(Clone, Debug, PartialEq)]
-pub struct Module<T: Type, F: types::Function<T>, E: Expression<T>, I: Instruction<T, E>> {
+pub struct Module<
+    T: Type,
+    F: FunctionType<Type = T>,
+    E: Expression<Type = T>,
+    I: Instruction<Type = T, Expression = E>,
+> {
     variable_declarations: Vec<VariableDeclaration<T>>,
     function_declarations: Vec<FunctionDeclaration<T, F>>,
     variable_definitions: Vec<VariableDefinition<T, E>>,
     function_definitions: Vec<FunctionDefinition<T, F, E, I>>,
 }
 
-impl<T: Type, F: types::Function<T>, E: Expression<T>, I: Instruction<T, E>> Module<T, F, E, I> {
+impl<
+        T: Type,
+        F: FunctionType<Type = T>,
+        E: Expression<Type = T>,
+        I: Instruction<Type = T, Expression = E>,
+    > Module<T, F, E, I>
+{
     pub fn new(
         variable_declarations: Vec<VariableDeclaration<T>>,
         function_declarations: Vec<FunctionDeclaration<T, F>>,

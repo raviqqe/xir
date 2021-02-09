@@ -2,7 +2,7 @@ use super::expression::Expression;
 use crate::types::Type;
 
 #[derive(Clone, Debug, PartialEq)]
-pub struct VariableDefinition<T: Type, E: Expression<T>> {
+pub struct VariableDefinition<T: Type, E: Expression> {
     name: String,
     body: E,
     type_: T,
@@ -10,7 +10,7 @@ pub struct VariableDefinition<T: Type, E: Expression<T>> {
     global: bool,
 }
 
-impl<T: Type, E: Expression<T>> VariableDefinition<T, E> {
+impl<T: Type, E: Expression> VariableDefinition<T, E> {
     pub fn new(
         name: impl Into<String>,
         body: impl Into<E>,

@@ -1,14 +1,14 @@
 use super::block::Block;
 use super::expression::Expression;
 use super::instruction::Instruction;
-use crate::types::{self, Type};
+use crate::types::{FunctionType, Type};
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct FunctionDefinition<
     T: Type,
-    F: types::Function<T>,
-    E: Expression<T>,
-    I: Instruction<T, E>,
+    F: FunctionType,
+    E: Expression<Type = T>,
+    I: Instruction<Type = T, Expression = E>,
 > {
     name: String,
     arguments: Vec<String>,
@@ -17,8 +17,12 @@ pub struct FunctionDefinition<
     global: bool,
 }
 
-impl<T: Type, F: types::Function<T>, E: Expression<T>, I: Instruction<T, E>>
-    FunctionDefinition<T, F, E, I>
+impl<
+        T: Type,
+        F: FunctionType,
+        E: Expression<Type = T>,
+        I: Instruction<Type = T, Expression = E>,
+    > FunctionDefinition<T, F, E, I>
 {
     pub fn new(
         name: impl Into<String>,

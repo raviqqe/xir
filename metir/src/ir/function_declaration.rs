@@ -1,12 +1,12 @@
-use crate::types::{self, Type};
+use crate::types::{FunctionType, Type};
 
 #[derive(Clone, Debug, PartialEq)]
-pub struct FunctionDeclaration<T: Type, F: types::Function<T>> {
+pub struct FunctionDeclaration<T: Type, F: FunctionType<Type = T>> {
     name: String,
     type_: F,
 }
 
-impl<T: Type, F: types::Function<T>> FunctionDeclaration<T, F> {
+impl<T: Type, F: FunctionType<Type = T>> FunctionDeclaration<T, F> {
     pub fn new(name: impl Into<String>, type_: F) -> Self {
         Self {
             name: name.into(),

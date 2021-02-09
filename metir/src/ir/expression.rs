@@ -1,5 +1,7 @@
 use crate::types::Type;
 
-pub trait Expression<T: Type> {
-    fn type_(&self) -> &T;
+pub trait Expression {
+    type Type: Type;
+
+    fn type_(&self) -> &Self::Type;
 }

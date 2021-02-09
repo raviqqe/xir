@@ -2,12 +2,12 @@ use super::expression::Expression;
 use crate::types::Type;
 
 #[derive(Clone, Debug, PartialEq)]
-pub struct Return<T: Type, E: Expression<T>> {
+pub struct Return<T: Type, E: Expression> {
     type_: T,
     expression: E,
 }
 
-impl<T: Type, E: Expression<T>> Return<T, E> {
+impl<T: Type, E: Expression> Return<T, E> {
     pub fn new(type_: impl Into<T>, expression: impl Into<E>) -> Self {
         Self {
             type_: type_.into(),
