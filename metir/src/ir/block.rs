@@ -1,28 +1,18 @@
+use super::expression::Expression;
 use super::instruction::Instruction;
-use super::terminal_instruction::TerminalInstruction;
+use crate::types::Type;
 
 #[derive(Clone, Debug, PartialEq)]
-pub struct Block {
-    instructions: Vec<Instruction>,
-    terminal_instruction: TerminalInstruction,
+pub struct Block<T: Type, E: Expression<T>, I: Instruction<T, E>> {
+    instructions: Vec<I>,
 }
 
-impl Block {
-    pub fn new(
-        instructions: Vec<Instruction>,
-        terminal_instruction: impl Into<TerminalInstruction>,
-    ) -> Self {
-        Self {
-            instructions: instructions.into_iter().collect(),
-            terminal_instruction: terminal_instruction.into(),
-        }
+impl<T: Type, E: Expression<T>, I: Instruction<T, E>> Block<T, E, I> {
+    pub fn new(instructions: Vec<I>) -> Self {
+        Self { instructions }
     }
 
-    pub fn instructions(&self) -> &[Instruction] {
+    pub fn instructions(&self) -> &[I] {
         &self.instructions
-    }
-
-    pub fn terminal_instruction(&self) -> &TerminalInstruction {
-        &self.terminal_instruction
     }
 }

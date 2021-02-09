@@ -2,19 +2,19 @@ use super::expression::Expression;
 use crate::types::Type;
 
 #[derive(Clone, Debug, PartialEq)]
-pub struct VariableDefinition {
+pub struct VariableDefinition<T: Type, E: Expression<T>> {
     name: String,
-    body: Expression,
-    type_: Type,
+    body: E,
+    type_: T,
     mutable: bool,
     global: bool,
 }
 
-impl VariableDefinition {
+impl<T: Type, E: Expression<T>> VariableDefinition<T, E> {
     pub fn new(
         name: impl Into<String>,
-        body: impl Into<Expression>,
-        type_: impl Into<Type>,
+        body: impl Into<E>,
+        type_: impl Into<T>,
         mutable: bool,
         global: bool,
     ) -> Self {
@@ -31,11 +31,11 @@ impl VariableDefinition {
         &self.name
     }
 
-    pub fn body(&self) -> &Expression {
+    pub fn body(&self) -> &E {
         &self.body
     }
 
-    pub fn type_(&self) -> &Type {
+    pub fn type_(&self) -> &T {
         &self.type_
     }
 

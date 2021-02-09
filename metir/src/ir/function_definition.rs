@@ -1,39 +1,37 @@
-use super::argument::Argument;
 use super::block::Block;
+use super::expression::Expression;
+use super::instruction::Instruction;
 use crate::types::{self, Type};
 
 #[derive(Clone, Debug, PartialEq)]
-pub struct FunctionDefinition {
+pub struct FunctionDefinition<
+    T: Type,
+    F: types::Function<T>,
+    E: Expression<T>,
+    I: Instruction<T, E>,
+> {
     name: String,
-    arguments: Vec<Argument>,
-    body: Block,
-    result_type: Type,
-    type_: types::Function,
+    arguments: Vec<String>,
+    body: Block<T, E, I>,
+    type_: F,
     global: bool,
 }
 
-impl FunctionDefinition {
+impl<T: Type, F: types::Function<T>, E: Expression<T>, I: Instruction<T, E>>
+    FunctionDefinition<T, F, E, I>
+{
     pub fn new(
         name: impl Into<String>,
-        arguments: Vec<Argument>,
-        body: Block,
-        result_type: impl Into<Type>,
+        arguments: Vec<String>,
+        body: Block<T, E, I>,
+        type_: impl Into<F>,
         global: bool,
     ) -> Self {
-        let result_type = result_type.into();
-
         Self {
-            type_: types::Function::new(
-                arguments
-                    .iter()
-                    .map(|argument| argument.type_().clone())
-                    .collect(),
-                result_type.clone(),
-            ),
             name: name.into(),
             arguments,
             body,
-            result_type,
+            type_: type_.into(),
             global,
         }
     }
@@ -42,19 +40,15 @@ impl FunctionDefinition {
         &self.name
     }
 
-    pub fn arguments(&self) -> &[Argument] {
+    pub fn arguments(&self) -> &[String] {
         &self.arguments
     }
 
-    pub fn body(&self) -> &Block {
+    pub fn body(&self) -> &Block<T, E, I> {
         &self.body
     }
 
-    pub fn result_type(&self) -> &Type {
-        &self.result_type
-    }
-
-    pub fn type_(&self) -> &types::Function {
+    pub fn type_(&self) -> &F {
         &self.type_
     }
 

@@ -1,13 +1,13 @@
 use crate::types::Type;
 
 #[derive(Clone, Debug, PartialEq)]
-pub struct Argument {
+pub struct Argument<T: Type> {
     name: String,
-    type_: Type,
+    type_: T,
 }
 
-impl Argument {
-    pub fn new(name: impl Into<String>, type_: impl Into<Type>) -> Self {
+impl<T: Type> Argument<T> {
+    pub fn new(name: impl Into<String>, type_: impl Into<T>) -> Self {
         Self {
             name: name.into(),
             type_: type_.into(),
@@ -18,7 +18,7 @@ impl Argument {
         &self.name
     }
 
-    pub fn type_(&self) -> &Type {
+    pub fn type_(&self) -> &T {
         &self.type_
     }
 }
