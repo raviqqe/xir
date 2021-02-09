@@ -1,4 +1,4 @@
-# metir
+# xir
 
 The meta IR for functional programming languages
 

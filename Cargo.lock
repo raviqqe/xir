@@ -29,13 +29,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "metir"
-version = "0.1.0"
-dependencies = [
- "petgraph",
-]
-
-[[package]]
 name = "petgraph"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -43,4 +36,11 @@ checksum = "467d164a6de56270bd7c4d070df81d07beace25012d5103ced4e9ff08d6afdb7"
 dependencies = [
  "fixedbitset",
  "indexmap",
+]
+
+[[package]]
+name = "xir"
+version = "0.1.0"
+dependencies = [
+ "petgraph",
 ]
