@@ -5,4 +5,5 @@ pub trait FunctionType: Type {
 
     fn arguments(&self) -> &[Self::Type];
     fn result(&self) -> &Self::Type;
+    fn into_type(self) -> Self::Type;
 }
