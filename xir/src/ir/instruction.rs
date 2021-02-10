@@ -3,7 +3,7 @@ use crate::types::Type;
 
 pub trait Instruction {
     type Type: Type;
-    type Expression: Expression;
+    type Expression: Expression<Type = Self::Type>;
 
-    fn result(&self) -> Option<Self::Expression>;
+    fn result(&self) -> Self::Expression;
 }
