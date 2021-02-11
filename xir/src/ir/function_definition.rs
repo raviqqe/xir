@@ -1,33 +1,21 @@
 use super::block::Block;
-use super::expression::Expression;
 use super::instruction::Instruction;
-use crate::types::{FunctionType, Type};
+use crate::types::FunctionType;
 
 #[derive(Clone, Debug, PartialEq)]
-pub struct FunctionDefinition<
-    T: Type,
-    F: FunctionType,
-    E: Expression<Type = T>,
-    I: Instruction<Type = T, Expression = E>,
-> {
+pub struct FunctionDefinition<F: FunctionType, I: Instruction> {
     name: String,
     arguments: Vec<String>,
-    body: Block<T, E, I>,
+    body: Block<I>,
     type_: F,
     global: bool,
 }
 
-impl<
-        T: Type,
-        F: FunctionType,
-        E: Expression<Type = T>,
-        I: Instruction<Type = T, Expression = E>,
-    > FunctionDefinition<T, F, E, I>
-{
+impl<F: FunctionType, I: Instruction> FunctionDefinition<F, I> {
     pub fn new(
         name: impl Into<String>,
         arguments: Vec<String>,
-        body: Block<T, E, I>,
+        body: Block<I>,
         type_: impl Into<F>,
         global: bool,
     ) -> Self {
@@ -48,7 +36,7 @@ impl<
         &self.arguments
     }
 
-    pub fn body(&self) -> &Block<T, E, I> {
+    pub fn body(&self) -> &Block<I> {
         &self.body
     }
 
