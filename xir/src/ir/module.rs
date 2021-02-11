@@ -11,7 +11,7 @@ pub struct Module<
     T: Type,
     F: FunctionType<Type = T>,
     E: Expression<Type = T>,
-    I: Instruction<Type = T, Expression = E>,
+    I: Instruction<Expression = E>,
 > {
     variable_declarations: Vec<VariableDeclaration<T>>,
     function_declarations: Vec<FunctionDeclaration<T, F>>,
@@ -23,7 +23,7 @@ impl<
         T: Type,
         F: FunctionType<Type = T>,
         E: Expression<Type = T>,
-        I: Instruction<Type = T, Expression = E>,
+        I: Instruction<Expression = E>,
     > Module<T, F, E, I>
 {
     pub fn new(
