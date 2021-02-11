@@ -16,7 +16,7 @@ pub struct Module<
     variable_declarations: Vec<VariableDeclaration<T>>,
     function_declarations: Vec<FunctionDeclaration<T, F>>,
     variable_definitions: Vec<VariableDefinition<T, E>>,
-    function_definitions: Vec<FunctionDefinition<T, F, E, I>>,
+    function_definitions: Vec<FunctionDefinition<F, I>>,
 }
 
 impl<
@@ -30,7 +30,7 @@ impl<
         variable_declarations: Vec<VariableDeclaration<T>>,
         function_declarations: Vec<FunctionDeclaration<T, F>>,
         variable_definitions: Vec<VariableDefinition<T, E>>,
-        function_definitions: Vec<FunctionDefinition<T, F, E, I>>,
+        function_definitions: Vec<FunctionDefinition<F, I>>,
     ) -> Self {
         Self {
             variable_declarations,
@@ -52,7 +52,7 @@ impl<
         &self.variable_definitions
     }
 
-    pub fn function_definitions(&self) -> &[FunctionDefinition<T, F, E, I>] {
+    pub fn function_definitions(&self) -> &[FunctionDefinition<F, I>] {
         &self.function_definitions
     }
 }
