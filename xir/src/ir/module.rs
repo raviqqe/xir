@@ -1,9 +1,8 @@
-use super::expression::Expression;
-use super::function_declaration::FunctionDeclaration;
-use super::function_definition::FunctionDefinition;
-use super::instruction::Instruction;
-use super::variable_declaration::VariableDeclaration;
-use super::variable_definition::VariableDefinition;
+use super::{
+    expression::Expression, function_declaration::FunctionDeclaration,
+    function_definition::FunctionDefinition, instruction::Instruction,
+    variable_declaration::VariableDeclaration, variable_definition::VariableDefinition,
+};
 use crate::types::{FunctionType, Type};
 
 #[derive(Clone, Debug, PartialEq)]

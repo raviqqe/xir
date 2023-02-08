@@ -1,5 +1,4 @@
-use super::block::Block;
-use super::instruction::Instruction;
+use super::{block::Block, instruction::Instruction};
 use crate::types::FunctionType;
 
 #[derive(Clone, Debug, PartialEq)]
