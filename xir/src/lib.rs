@@ -5,7 +5,9 @@
 extern crate alloc;
 
 mod block;
+mod context;
 mod operation;
 
 pub use block::*;
+pub use context::*;
 pub use operation::*;

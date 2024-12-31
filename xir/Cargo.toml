@@ -9,6 +9,7 @@ readme.workspace = true
 repository.workspace = true
 
 [dependencies]
+bumpalo = { version = "3.16.0", features = ["allocator_api"] }
 petgraph = "0.6"
 
 [lints]
