@@ -11,6 +11,7 @@ mod operation;
 mod span;
 mod r#type;
 
+pub use argument::*;
 pub use block::*;
 pub use context::*;
 pub use operation::*;
