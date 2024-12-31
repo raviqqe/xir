@@ -1,8 +1,11 @@
-use crate::block::Block;
+use crate::{block::Block, Type};
 use core::alloc::Allocator;
 
 /// An operation.
 pub trait Operation<A: Allocator> {
+    /// A type.
+    type Type: Type;
+
     /// An inner operation.
     type InnerOperation: Operation<A>;
 
