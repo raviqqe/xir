@@ -2,6 +2,7 @@ use crate::Operation;
 use alloc::{alloc::Allocator, collections::LinkedList};
 
 /// A block.
+#[derive(Debug)]
 pub struct Block<A: Allocator> {
     operations: LinkedList<Operation, A>,
 }
