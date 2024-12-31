@@ -4,9 +4,11 @@
 
 extern crate alloc;
 
+mod argument;
 mod block;
 mod context;
 mod operation;
+mod span;
 mod r#type;
 
 pub use block::*;
