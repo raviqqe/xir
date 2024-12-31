@@ -19,13 +19,13 @@ impl<'a> Span<'a> {
         start: Position,
         end: Position,
     ) -> &'a Span<'a> {
-        let span = context.allocator.alloc(Span {
+        let span = context.allocator().alloc(Span {
             filename,
             start,
             end,
         });
 
-        context.spans.borrow_mut().insert(span);
+        context.spans().borrow_mut().insert(span);
 
         span
     }

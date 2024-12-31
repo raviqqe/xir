@@ -6,8 +6,8 @@ use crate::span::Span;
 /// A context.
 #[derive(Debug, Default)]
 pub struct Context<'a> {
-    pub(crate) allocator: Bump,
-    pub(crate) spans: RefCell<HashSet<&'a Span<'a>>>,
+    allocator: Bump,
+    spans: RefCell<HashSet<&'a Span<'a>>>,
 }
 
 impl<'a> Context<'a> {
@@ -22,5 +22,9 @@ impl<'a> Context<'a> {
     /// Returns an allocator.
     pub fn allocator(&self) -> &Bump {
         &self.allocator
+    }
+
+    pub(crate) fn spans(&self) -> &RefCell<HashSet<&'a Span<'a>>> {
+        &self.spans
     }
 }
