@@ -1,18 +1,31 @@
-use std::alloc::Allocator;
+use crate::Context;
+use core::alloc::Allocator;
 
-pub struct Location<A: Allocator> {
-    filename: (),
-    position: usize,
-}
+pub type Position = u32;
 
+#[derive(Debug, Eq, Hash, PartialEq)]
 pub struct Span {
-    start: Location,
-    end: Location,
+    filename: (),
+    start: Position,
+    end: Position,
 }
 
 impl Span {
-    pub fn new(context: &Context, start: Location, end: Location) -> Span {
-        Span { start, end }
+    pub fn new<'a>(
+        context: &'a Context<'a>,
+        filename: &'a str,
+        start: Position,
+        end: Position,
+    ) -> &'a Span {
+        let span = context.allocator().allocate(Span {
+            filename: (),
+            start,
+            end,
+        });
+
+        context.spans_mut().push();
+
+        span
     }
 
     pub fn start(&self) -> Location {

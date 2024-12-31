@@ -1,3 +1,5 @@
+use crate::Type;
+
 pub struct Argument<T: Type> {
     r#type: T,
 }
