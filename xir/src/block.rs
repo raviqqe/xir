@@ -3,23 +3,23 @@ use alloc::{alloc::Allocator, collections::LinkedList};
 
 /// A block.
 #[derive(Debug)]
-pub struct Block<A: Allocator> {
-    operations: LinkedList<Operation, A>,
+pub struct Block<O: Operation, A: Allocator> {
+    operations: LinkedList<O, A>,
 }
 
-impl Block {
+impl<O: Operation, A: Allocator> Block<O, A> {
     /// Creates a block.
-    pub fn new(operations: LinkedList<Operation>) -> Self {
+    pub fn new(operations: LinkedList<O>) -> Self {
         Self { operations }
     }
 
     /// Returns a reference to operations.
-    pub fn operations(&self) -> &LinkedList<Operation> {
+    pub fn operations(&self) -> &LinkedList<O> {
         &self.operations
     }
 
     /// Returns a mutable reference to operations.
-    pub fn operations_mut(&mut self) -> &mut LinkedList<Operation> {
+    pub fn operations_mut(&mut self) -> &mut LinkedList<O> {
         &mut self.operations
     }
 }
