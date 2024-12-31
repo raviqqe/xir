@@ -1,5 +1,5 @@
 use crate::block::Block;
-use alloc::alloc::Allocator;
+use core::alloc::Allocator;
 
 /// An operation.
 pub trait Operation<A: Allocator> {

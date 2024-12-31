@@ -1,5 +1,6 @@
 use crate::Operation;
-use alloc::{alloc::Allocator, collections::LinkedList};
+use core::alloc::Allocator;
+use alloc::collections::LinkedList;
 
 /// A block.
 #[derive(Debug)]
@@ -9,12 +10,12 @@ pub struct Block<O: Operation<A>, A: Allocator> {
 
 impl<O: Operation<A>, A: Allocator> Block<O, A> {
     /// Creates a block.
-    pub fn new(operations: LinkedList<O, A>) -> Self {
+    pub const fn new(operations: LinkedList<O, A>) -> Self {
         Self { operations }
     }
 
     /// Returns a reference to operations.
-    pub fn operations(&self) -> &LinkedList<O, A> {
+    pub const fn operations(&self) -> &LinkedList<O, A> {
         &self.operations
     }
 
