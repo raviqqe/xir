@@ -6,8 +6,8 @@ use crate::span::Span;
 /// A context.
 #[derive(Debug, Default)]
 pub struct Context<'a> {
-    allocator: Bump,
-    spans: HashSet<&'a Span>,
+    pub(crate) allocator: Bump,
+    pub(crate) spans: HashSet<&'a Span>,
 }
 
 impl<'a> Context<'a> {

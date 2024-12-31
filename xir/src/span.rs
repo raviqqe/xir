@@ -11,18 +11,18 @@ pub struct Span {
 
 impl Span {
     pub fn new<'a>(
-        context: &'a Context<'a>,
+        context: &'a mut Context<'a>,
         _filename: &'a str,
         start: Position,
         end: Position,
     ) -> &'a Span {
-        let span = context.allocator().alloc(Span {
+        let span = context.allocator.alloc(Span {
             filename: (),
             start,
             end,
         });
 
-        //context.spans_mut().push();
+        context.spans.insert(span);
 
         span
     }
