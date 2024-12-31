@@ -13,6 +13,6 @@ impl Context {
     }
 
     pub fn allocator(&self) -> impl Allocator {
-        &mut self.allocator
+        &self.allocator
     }
 }
