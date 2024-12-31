@@ -1,7 +1,9 @@
 use crate::Context;
 
+/// A position.
 pub type Position = u32;
 
+/// A span.
 #[derive(Debug, Eq, Hash, PartialEq)]
 pub struct Span {
     filename: (),
@@ -10,8 +12,9 @@ pub struct Span {
 }
 
 impl Span {
+    /// Creates a span.
     pub fn new<'a>(
-        context: &'a mut Context<'a>,
+        context: &'a Context<'a>,
         _filename: &'a str,
         start: Position,
         end: Position,
@@ -22,15 +25,17 @@ impl Span {
             end,
         });
 
-        context.spans.insert(span);
+        context.spans.borrow_mut().insert(span);
 
         span
     }
 
+    /// Returns a start position.
     pub fn start(&self) -> Position {
         self.start
     }
 
+    /// Returns an end position.
     pub fn end(&self) -> Position {
         self.end
     }
@@ -42,6 +47,8 @@ mod tests {
 
     #[test]
     fn foo() {
-        let mut context = foo;
+        let context = Context::new();
+
+        Span::new(&context, "foo.rs", 0, 1);
     }
 }

@@ -16,3 +16,4 @@ pub use block::*;
 pub use context::*;
 pub use operation::*;
 pub use r#type::*;
+pub use span::*;
