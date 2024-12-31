@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/setup
+      - uses: raviqqe/cargo-cache@v1
       - uses: bnjbvr/cargo-machete@main
   readme:
     runs-on: ubuntu-latest
