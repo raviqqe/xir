@@ -7,7 +7,7 @@ use crate::span::Span;
 #[derive(Debug, Default)]
 pub struct Context<'a> {
     pub(crate) allocator: Bump,
-    pub(crate) spans: RefCell<HashSet<&'a Span>>,
+    pub(crate) spans: RefCell<HashSet<&'a Span<'a>>>,
 }
 
 impl<'a> Context<'a> {

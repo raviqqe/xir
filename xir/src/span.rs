@@ -5,22 +5,22 @@ pub type Position = u32;
 
 /// A span.
 #[derive(Debug, Eq, Hash, PartialEq)]
-pub struct Span {
-    filename: (),
+pub struct Span<'a> {
+    filename: &'a str,
     start: Position,
     end: Position,
 }
 
-impl Span {
+impl<'a> Span<'a> {
     /// Creates a span.
-    pub fn new<'a>(
+    pub fn new(
         context: &'a Context<'a>,
-        _filename: &'a str,
+        filename: &'a str,
         start: Position,
         end: Position,
-    ) -> &'a Span {
+    ) -> &'a Span<'a> {
         let span = context.allocator.alloc(Span {
-            filename: (),
+            filename,
             start,
             end,
         });
