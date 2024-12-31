@@ -17,13 +17,16 @@ impl Span {
         start: Position,
         end: Position,
     ) -> &'a Span {
-        let span = context.allocator().allocate(Span {
-            filename: (),
-            start,
-            end,
-        });
+        let span = context
+            .allocator()
+            .allocate(Span {
+                filename: (),
+                start,
+                end,
+            })
+            .unwrap();
 
-        context.spans_mut().push();
+        //context.spans_mut().push();
 
         span
     }
