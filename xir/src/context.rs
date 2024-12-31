@@ -2,6 +2,7 @@ use bumpalo::Bump;
 use core::alloc::Allocator;
 
 /// A context.
+#[derive(Debug, Default)]
 pub struct Context {
     allocator: Bump,
 }
