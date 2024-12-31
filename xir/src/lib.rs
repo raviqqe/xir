@@ -1,2 +1,1 @@
-pub mod ir;
-pub mod types;
+//! Blah-blah intermediate representation.
