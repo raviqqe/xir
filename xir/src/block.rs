@@ -3,11 +3,11 @@ use alloc::{alloc::Allocator, collections::LinkedList};
 
 /// A block.
 #[derive(Debug)]
-pub struct Block<O: Operation, A: Allocator> {
+pub struct Block<O: Operation<A>, A: Allocator> {
     operations: LinkedList<O, A>,
 }
 
-impl<O: Operation, A: Allocator> Block<O, A> {
+impl<O: Operation<A>, A: Allocator> Block<O, A> {
     /// Creates a block.
     pub fn new(operations: LinkedList<O, A>) -> Self {
         Self { operations }
