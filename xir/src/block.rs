@@ -9,17 +9,17 @@ pub struct Block<O: Operation, A: Allocator> {
 
 impl<O: Operation, A: Allocator> Block<O, A> {
     /// Creates a block.
-    pub fn new(operations: LinkedList<O>) -> Self {
+    pub fn new(operations: LinkedList<O, A>) -> Self {
         Self { operations }
     }
 
     /// Returns a reference to operations.
-    pub fn operations(&self) -> &LinkedList<O> {
+    pub fn operations(&self) -> &LinkedList<O, A> {
         &self.operations
     }
 
     /// Returns a mutable reference to operations.
-    pub fn operations_mut(&mut self) -> &mut LinkedList<O> {
+    pub fn operations_mut(&mut self) -> &mut LinkedList<O, A> {
         &mut self.operations
     }
 }
