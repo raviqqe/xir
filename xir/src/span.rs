@@ -18,7 +18,7 @@ impl<'a> Span<'a> {
         filename: &'a str,
         start: Position,
         end: Position,
-    ) -> &'a Span<'a> {
+    ) -> &'a Self {
         let span = context.allocator().alloc(Span {
             filename,
             start,
@@ -31,12 +31,12 @@ impl<'a> Span<'a> {
     }
 
     /// Returns a start position.
-    pub fn start(&self) -> Position {
+    pub const fn start(&self) -> Position {
         self.start
     }
 
     /// Returns an end position.
-    pub fn end(&self) -> Position {
+    pub const fn end(&self) -> Position {
         self.end
     }
 }

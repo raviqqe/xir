@@ -1,5 +1,6 @@
 use bumpalo::Bump;
-use std::{cell::RefCell, collections::HashSet};
+use core::cell::RefCell;
+use std::collections::HashSet;
 
 use crate::span::Span;
 
@@ -20,11 +21,11 @@ impl<'a> Context<'a> {
     }
 
     /// Returns an allocator.
-    pub fn allocator(&self) -> &Bump {
+    pub const fn allocator(&self) -> &Bump {
         &self.allocator
     }
 
-    pub(crate) fn spans(&self) -> &RefCell<HashSet<&'a Span<'a>>> {
+    pub(crate) const fn spans(&self) -> &RefCell<HashSet<&'a Span<'a>>> {
         &self.spans
     }
 }

@@ -7,12 +7,12 @@ pub struct Argument<T: Type> {
 
 impl<T: Type> Argument<T> {
     /// Creates an argument.
-    pub fn new(r#type: T) -> Self {
+    pub const fn new(r#type: T) -> Self {
         Self { r#type }
     }
 
     /// Returns an argument.
-    pub fn r#type(&self) -> &T {
+    pub const fn r#type(&self) -> &T {
         &self.r#type
     }
 }
