@@ -1,6 +1,6 @@
 # xir
 
-The meta IR for functional programming languages
+The blah-blah intermediate representation.
 
 ## License
 
