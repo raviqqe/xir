@@ -13,11 +13,12 @@ impl Block {
         Self { operations }
     }
 
-    /// Creates a block.
+    /// Returns a reference to operations.
     pub fn operations(&self) -> &LinkedList<Operation> {
         &self.operations
     }
 
+    /// Returns a mutable reference to operations.
     pub fn operations_mut(&mut self) -> &mut LinkedList<Operation> {
         &mut self.operations
     }
