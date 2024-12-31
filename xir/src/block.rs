@@ -1,17 +1,20 @@
-use crate::Operation;
+use crate::{Argument, Operation};
 use alloc::collections::LinkedList;
 use core::alloc::Allocator;
 
 /// A block.
 #[derive(Debug)]
-pub struct Block<O: Operation<A>, A: Allocator> {
-    arguments: Vec<O::Type, A>,
+pub struct Block<'a, O: Operation<A>, A: Allocator> {
+    arguments: Vec<Argument<'a, O::Type>, A>,
     operations: LinkedList<O, A>,
 }
 
-impl<O: Operation<A>, A: Allocator> Block<O, A> {
+impl<'a, O: Operation<A>, A: Allocator> Block<'a, O, A> {
     /// Creates a block.
-    pub const fn new(arguments: Vec<O::Type, A>, operations: LinkedList<O, A>) -> Self {
+    pub const fn new(
+        arguments: Vec<Argument<'a, O::Type>, A>,
+        operations: LinkedList<O, A>,
+    ) -> Self {
         Self {
             arguments,
             operations,
@@ -19,7 +22,7 @@ impl<O: Operation<A>, A: Allocator> Block<O, A> {
     }
 
     /// Returns arguments.
-    pub fn arguments(&self) -> &[O::Type] {
+    pub fn arguments(&self) -> &[Argument<'a, O::Type>] {
         &self.arguments
     }
 

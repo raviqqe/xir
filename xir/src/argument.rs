@@ -1,18 +1,25 @@
-use crate::Type;
+use crate::{Span, Type};
 
 /// An argument.
-pub struct Argument<T: Type> {
+#[derive(Debug)]
+pub struct Argument<'a, T: Type> {
     r#type: T,
+    span: Span<'a>,
 }
 
-impl<T: Type> Argument<T> {
+impl<'a, T: Type> Argument<'a, T> {
     /// Creates an argument.
-    pub const fn new(r#type: T) -> Self {
-        Self { r#type }
+    pub const fn new(r#type: T, span: Span<'a>) -> Self {
+        Self { r#type, span }
     }
 
     /// Returns an argument.
     pub const fn r#type(&self) -> &T {
         &self.r#type
+    }
+
+    /// Returns a span.
+    pub const fn span(&self) -> Span<'a> {
+        self.span
     }
 }

@@ -10,7 +10,7 @@ pub trait Operation<A: Allocator> {
     type InnerOperation: Operation<A>;
 
     /// Returns if an operation is of control.
-    fn blocks<'a>(&'a self) -> impl Iterator<Item = &'a Block<Self::InnerOperation, A>>
+    fn blocks<'a>(&'a self) -> impl Iterator<Item = &'a Block<'a, Self::InnerOperation, A>>
     where
         A: 'a;
 

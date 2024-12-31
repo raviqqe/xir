@@ -4,7 +4,7 @@ use crate::Context;
 pub type Position = u32;
 
 /// A span.
-#[derive(Debug, Eq, Hash, PartialEq)]
+#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
 pub struct Span<'a> {
     filename: &'a str,
     start: Position,
