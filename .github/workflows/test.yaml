@@ -26,3 +26,14 @@ jobs:
       - uses: streetsidesoftware/cspell-action@v6
         with:
           files: "**/*.{md,rs}"
+  unused_dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - uses: bnjbvr/cargo-machete@main
+  readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: raviqqe/markdown-link-check@v1
