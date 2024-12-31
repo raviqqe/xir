@@ -1,7 +1,7 @@
 use std::alloc::Allocator;
 
-pub struct Location<'a, A: Allocator> {
-    filename: &'a str,
+pub struct Location<A: Allocator> {
+    filename: (),
     position: usize,
 }
 
