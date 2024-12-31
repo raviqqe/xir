@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: raviqqe/cargo-cache@v1
       - run: cargo test
   format:
     runs-on: ubuntu-latest
@@ -16,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: raviqqe/cargo-cache@v1
       - run: cargo clippy -- -D warnings
   spell_check:
     runs-on: ubuntu-latest
