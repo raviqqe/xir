@@ -19,7 +19,7 @@ impl Span {
     ) -> &'a Span {
         let span = context
             .allocator()
-            .allocate(Span {
+            .alloc(Span {
                 filename: (),
                 start,
                 end,

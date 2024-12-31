@@ -1,5 +1,4 @@
 use bumpalo::Bump;
-use core::alloc::Allocator;
 use std::collections::HashSet;
 
 use crate::span::Span;
@@ -21,7 +20,7 @@ impl<'a> Context<'a> {
     }
 
     /// Returns an allocator.
-    pub fn allocator(&self) -> impl Allocator + '_ {
+    pub fn allocator(&self) -> &Bump {
         &self.allocator
     }
 
