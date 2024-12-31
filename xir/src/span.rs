@@ -35,3 +35,13 @@ impl Span {
         self.end
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn foo() {
+        let mut context = foo;
+    }
+}
