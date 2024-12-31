@@ -28,11 +28,11 @@ impl Span {
         span
     }
 
-    pub fn start(&self) -> Location {
+    pub fn start(&self) -> Position {
         self.start
     }
 
-    pub fn end(&self) -> Location {
+    pub fn end(&self) -> Position {
         self.end
     }
 }
