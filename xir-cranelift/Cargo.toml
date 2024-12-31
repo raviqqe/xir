@@ -9,6 +9,7 @@ readme.workspace = true
 repository.workspace = true
 
 [dependencies]
+xir = { version = "0.1.0", path = "../xir" }
 
 [lints]
 workspace = true
