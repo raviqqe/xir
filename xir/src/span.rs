@@ -46,7 +46,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn foo() {
+    fn create() {
         let context = Context::new();
 
         Span::new(&context, "foo.rs", 0, 1);
