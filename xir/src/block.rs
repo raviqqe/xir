@@ -1,6 +1,6 @@
 use crate::Operation;
-use core::alloc::Allocator;
 use alloc::collections::LinkedList;
+use core::alloc::Allocator;
 
 /// A block.
 #[derive(Debug)]
