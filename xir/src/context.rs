@@ -12,7 +12,8 @@ impl Context {
         }
     }
 
-    pub fn allocator(&self) -> impl Allocator {
+    /// Returns an allocator.
+    pub fn allocator(&self) -> impl Allocator + '_ {
         &self.allocator
     }
 }
