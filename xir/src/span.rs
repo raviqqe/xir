@@ -12,7 +12,7 @@ pub struct Span {
 impl Span {
     pub fn new<'a>(
         context: &'a Context<'a>,
-        filename: &'a str,
+        _filename: &'a str,
         start: Position,
         end: Position,
     ) -> &'a Span {
