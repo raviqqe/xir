@@ -1,7 +1,7 @@
 [package]
 name = "xir-cranelift"
 description = "Cranelift intermediate represesntation for XIR"
-version = "0.1.0"
+version = "0.1.1"
 edition.workspace = true
 keywords.workspace = true
 license-file.workspace = true
@@ -9,7 +9,7 @@ readme.workspace = true
 repository.workspace = true
 
 [dependencies]
-xir = { version = "0.1.0", path = "../xir" }
+xir = { version = "0.1.1", path = "../xir" }
 
 [lints]
 workspace = true
