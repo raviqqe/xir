@@ -37,19 +37,12 @@ mod tests {
         let span = Span::new(&context, "", 0, 0);
         let integer_type = i64_type(span);
         let pointer_type = super::pointer_type(span);
-        let mut block = Block::new(
-            &context,
-            [
-                BlockArgument::new(integer_type, span),
-                BlockArgument::new(pointer_type, span),
-            ],
-        );
-        let argument = block.arguments()[0].into();
+        let mut block = Block::new(&context, [BlockArgument::new(pointer_type, span)]);
 
         block.operations_mut().push_back(load(
             &context,
             integer_type,
-            block.arguments()[1].into(),
+            block.arguments()[0].into(),
             span,
         ));
     }
