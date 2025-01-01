@@ -1,5 +1,5 @@
 use crate::{block_argument::BlockArgument, context::Context, Operation};
-use std::cell::RefCell;
+use core::cell::RefCell;
 
 /// A value.
 #[derive(Clone, Copy, Debug)]

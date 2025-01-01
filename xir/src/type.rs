@@ -9,17 +9,17 @@ pub struct Type<'a> {
 
 impl<'a> Type<'a> {
     /// Creates a type.
-    pub fn new(id: &'static str, span: Span<'a>) -> Self {
+    pub const fn new(id: &'static str, span: Span<'a>) -> Self {
         Self { id, span }
     }
 
     /// Returns an ID.
-    pub fn id(&self) -> &'static str {
+    pub const fn id(&self) -> &'static str {
         self.id
     }
 
     /// Returns a span.
-    pub fn span(&self) -> Span<'a> {
+    pub const fn span(&self) -> Span<'a> {
         self.span
     }
 }
