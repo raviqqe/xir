@@ -16,3 +16,23 @@ pub fn iadd<'a>(
 ) -> Operation<'a> {
     Operation::new(context, "cl.iadd", [lhs, rhs], [r#type], span)
 }
+
+/// Creates a `load` operation.
+pub fn load<'a>(
+    context: &'a Context<'a>,
+    r#type: Type<'a>,
+    pointer: Value<'a>,
+    span: Span<'a>,
+) -> Operation<'a> {
+    Operation::new(context, "cl.load", [pointer], [r#type], span)
+}
+
+/// Creates a `store` operation.
+pub fn store<'a>(
+    context: &'a Context<'a>,
+    value: Value<'a>,
+    pointer: Value<'a>,
+    span: Span<'a>,
+) -> Operation<'a> {
+    Operation::new(context, "cl.store", [value, pointer], [], span)
+}
