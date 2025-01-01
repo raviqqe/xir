@@ -35,18 +35,25 @@ mod tests {
     fn load_integer() {
         let context = Context::new();
         let span = Span::new(&context, "", 0, 0);
-        let r#type = i64_type(span);
-        let mut block = Block::new(&context, [BlockArgument::new(r#type, span)]);
+        let integer_type = i64_type(span);
+        let pointer_type = super::pointer_type(span);
+        let mut block = Block::new(
+            &context,
+            [
+                BlockArgument::new(integer_type, span),
+                BlockArgument::new(pointer_type, span),
+            ],
+        );
         let argument = block.arguments()[0].into();
 
         block
             .operations_mut()
-            .push_back(iconst(&context, r#type, span));
+            .push_back(iconst(&context, integer_type, span));
         let value = block.operations().back().unwrap().value(&context, 0);
 
         block
             .operations_mut()
-            .push_back(iadd(&context, value, argument, r#type, span));
+            .push_back(iadd(&context, value, argument, integer_type, span));
     }
 
     #[test]
