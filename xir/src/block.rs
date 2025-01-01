@@ -5,14 +5,14 @@ use alloc::collections::LinkedList;
 #[derive(Debug)]
 pub struct Block<'a> {
     arguments: Vec<BlockArgument<'a>, Allocator<'a>>,
-    operations: LinkedList<Operation, Allocator<'a>>,
+    operations: LinkedList<Operation<'a>, Allocator<'a>>,
 }
 
 impl<'a> Block<'a> {
     /// Creates a block.
     pub const fn new(
         arguments: Vec<BlockArgument<'a>, Allocator<'a>>,
-        operations: LinkedList<Operation, Allocator<'a>>,
+        operations: LinkedList<Operation<'a>, Allocator<'a>>,
     ) -> Self {
         Self {
             arguments,
@@ -26,12 +26,12 @@ impl<'a> Block<'a> {
     }
 
     /// Returns a reference to operations.
-    pub const fn operations(&self) -> &LinkedList<Operation, Allocator<'a>> {
+    pub const fn operations(&self) -> &LinkedList<Operation<'a>, Allocator<'a>> {
         &self.operations
     }
 
     /// Returns a mutable reference to operations.
-    pub fn operations_mut(&mut self) -> &mut LinkedList<Operation, Allocator<'a>> {
+    pub fn operations_mut(&mut self) -> &mut LinkedList<Operation<'a>, Allocator<'a>> {
         &mut self.operations
     }
 }

@@ -18,13 +18,13 @@ pub struct OperationValue<'a> {
 
 #[derive(Debug)]
 struct OperationValueInner<'a> {
-    operation: &'a Operation,
+    operation: &'a Operation<'a>,
     index: usize,
 }
 
 impl<'a> OperationValue<'a> {
     /// Creates an operation value.
-    pub fn new(context: &'a Context, operation: &'a Operation, index: usize) -> Self {
+    pub fn new(context: &'a Context<'a>, operation: &'a Operation<'a>, index: usize) -> Self {
         Self {
             inner: context
                 .allocator()
@@ -33,7 +33,7 @@ impl<'a> OperationValue<'a> {
     }
 
     /// Returns an operation.
-    pub fn operation(&self) -> &Operation {
+    pub fn operation(&self) -> &Operation<'a> {
         self.inner.borrow().operation
     }
 
@@ -43,7 +43,7 @@ impl<'a> OperationValue<'a> {
     }
 
     /// Replaces a value.
-    pub fn replace(&self, operation: &'a Operation, index: usize) {
+    pub fn replace(&self, operation: &'a Operation<'a>, index: usize) {
         *self.inner.borrow_mut() = OperationValueInner { operation, index }
     }
 }
