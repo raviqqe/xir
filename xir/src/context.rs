@@ -23,7 +23,7 @@ impl<'a> Context<'a> {
     }
 
     /// Returns an allocator.
-    pub const fn allocator(&self) -> &Bump {
+    pub const fn allocator(&self) -> Allocator {
         &self.allocator
     }
 
