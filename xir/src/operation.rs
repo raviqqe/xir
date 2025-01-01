@@ -1,8 +1,12 @@
 use crate::{Allocator, Context, OperationValue, Span, Type, Value};
 
 /// An operation.
+#[derive(Clone, Copy, Debug)]
+pub struct Operation<'a>(&'a OperationInner<'a>);
+
+/// An operation inner.
 #[derive(Debug)]
-pub struct Operation<'a> {
+struct OperationInner<'a> {
     id: &'static str,
     operands: Vec<Value<'a>, Allocator<'a>>,
     value_types: Vec<Type<'a>, Allocator<'a>>,
@@ -18,7 +22,7 @@ impl<'a> Operation<'a> {
         value_types: [Type<'a>; M],
         span: Span<'a>,
     ) -> Self {
-        Self {
+        Self(context.allocator().alloc(OperationInner {
             id,
             operands: {
                 let mut vec = Vec::new_in(context.allocator());
@@ -31,31 +35,31 @@ impl<'a> Operation<'a> {
                 vec
             },
             span,
-        }
+        }))
     }
 
     /// Returns an ID.
     pub fn id(&self) -> &'static str {
-        self.id
+        self.0.id
     }
 
     /// Returns operands.
     pub fn operands(&self) -> &[Value<'a>] {
-        &self.operands
+        &self.0.operands
     }
 
     /// Returns values.
     pub fn value_types(&self) -> &[Type<'a>] {
-        &self.value_types
+        &self.0.value_types
     }
 
     /// Returns a span.
     pub fn span(&self) -> Span<'a> {
-        self.span
+        self.0.span
     }
 
     /// Returns a value.
-    pub fn value(&'a self, context: &'a Context<'a>, index: usize) -> Value<'a> {
+    pub fn value(self, context: &'a Context<'a>, index: usize) -> Value<'a> {
         OperationValue::new(context, self, index).into()
     }
 }
