@@ -45,21 +45,11 @@ mod tests {
             ],
         );
         let argument = block.arguments()[0].into();
-        let argument = block.arguments()[0].into();
 
-        block
-            .operations_mut()
-            .push_back(load(&context, integer_type, span));
-        block
-            .operations_mut()
-            .push_back(iconst(&context, integer_type, span));
-        let value = block.operations().back().unwrap().value(&context, 0);
-
-        block.operations_mut().push_back(iadd(
+        block.operations_mut().push_back(load(
             &context,
-            value,
-            block.arguments()[0].into(),
             integer_type,
+            block.arguments()[1].into(),
             span,
         ));
     }
