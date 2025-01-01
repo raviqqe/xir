@@ -1,7 +1,7 @@
 use crate::{Span, Type};
 
 /// An argument.
-#[derive(Debug)]
+#[derive(Clone, Copy, Debug)]
 pub struct Argument<'a, T: Type> {
     r#type: T,
     span: Span<'a>,

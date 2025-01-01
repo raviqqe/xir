@@ -1,6 +1,6 @@
 use crate::r#type::Type;
 use core::alloc::Allocator;
-use xir::{Block, Context};
+use xir::{Block, Context, Span};
 
 /// An operation.
 pub enum Operation<'a, A: Allocator> {
@@ -8,15 +8,15 @@ pub enum Operation<'a, A: Allocator> {
 }
 
 pub struct IAdd<'a, A: Allocator> {
-    arguments: Vec<()>,
-    results: Vec<()>,
+    arguments: Vec<(), A>,
+    results: Vec<(), A>,
 }
 
 impl<'a, A: Allocator> IAdd<'a, A> {
-    pub fn new(context: &Context) -> Self {
+    pub fn new(context: &Context, lhs: (), rhs: (), span: Span) -> Self {
         Self {
-            arguments: Default::default(),
-            results: Default::default(),
+            arguments: Vec::new_in(context.allocator()),
+            results: Vec::new_in(context.allocator()),
         }
     }
 }

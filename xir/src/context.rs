@@ -1,8 +1,10 @@
+use crate::span::Span;
 use bumpalo::Bump;
 use core::cell::RefCell;
 use std::collections::HashSet;
 
-use crate::span::Span;
+/// An allocator.
+pub type Allocator<'a> = &'a Bump;
 
 /// A context.
 #[derive(Debug, Default)]
