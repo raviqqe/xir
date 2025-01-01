@@ -4,7 +4,7 @@ use core::cell::RefCell;
 use std::collections::HashSet;
 
 /// An allocator.
-pub type Allocator<'a> = &'a Bump;
+pub(crate) type Allocator<'a> = &'a Bump;
 
 /// A context.
 #[derive(Debug, Default)]
@@ -23,7 +23,7 @@ impl<'a> Context<'a> {
     }
 
     /// Returns an allocator.
-    pub const fn allocator(&self) -> Allocator {
+    pub(crate) const fn allocator(&self) -> Allocator {
         &self.allocator
     }
 
