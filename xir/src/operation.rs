@@ -1,4 +1,4 @@
-use crate::{Allocator, Context, Span, Type, Value};
+use crate::{Allocator, Context, OperationValue, Span, Type, Value};
 
 /// An operation.
 #[derive(Debug)]
@@ -50,5 +50,10 @@ impl<'a> Operation<'a> {
     /// Returns a span.
     pub fn span(&self) -> Span<'a> {
         self.span
+    }
+
+    /// Returns a value.
+    pub fn value(&'a self, context: &'a Context<'a>, index: usize) -> Value<'a> {
+        OperationValue::new(context, self, index).into()
     }
 }

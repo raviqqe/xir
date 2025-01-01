@@ -10,7 +10,7 @@ pub type Allocator<'a> = &'a Bump;
 #[derive(Debug, Default)]
 pub struct Context<'a> {
     allocator: Bump,
-    spans: RefCell<HashSet<&'a Span<'a>>>,
+    spans: RefCell<HashSet<Span<'a>>>,
 }
 
 impl<'a> Context<'a> {
@@ -27,7 +27,7 @@ impl<'a> Context<'a> {
         &self.allocator
     }
 
-    pub(crate) const fn spans(&self) -> &RefCell<HashSet<&'a Span<'a>>> {
+    pub(crate) const fn spans(&self) -> &RefCell<HashSet<Span<'a>>> {
         &self.spans
     }
 }

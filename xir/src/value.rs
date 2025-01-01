@@ -47,3 +47,9 @@ impl<'a> OperationValue<'a> {
         *self.inner.borrow_mut() = OperationValueInner { operation, index }
     }
 }
+
+impl<'a> From<OperationValue<'a>> for Value<'a> {
+    fn from(value: OperationValue<'a>) -> Self {
+        Self::OperationValue(value)
+    }
+}

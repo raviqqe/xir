@@ -1,4 +1,4 @@
-use crate::{Allocator, BlockArgument, Operation};
+use crate::{Allocator, BlockArgument, Context, Operation};
 use alloc::collections::LinkedList;
 
 /// A block.
@@ -10,13 +10,14 @@ pub struct Block<'a> {
 
 impl<'a> Block<'a> {
     /// Creates a block.
-    pub const fn new(
-        arguments: Vec<BlockArgument<'a>, Allocator<'a>>,
-        operations: LinkedList<Operation<'a>, Allocator<'a>>,
-    ) -> Self {
+    pub fn new<const N: usize>(context: &'a Context, arguments: [BlockArgument<'a>; N]) -> Self {
         Self {
-            arguments,
-            operations,
+            arguments: {
+                let mut vec = Vec::new_in(context.allocator());
+                vec.extend(arguments);
+                vec
+            },
+            operations: LinkedList::new_in(context.allocator()),
         }
     }
 
