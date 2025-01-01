@@ -38,13 +38,11 @@ mod tests {
         let integer_type = i64_type(span);
         let pointer_type = super::pointer_type(span);
         let mut block = Block::new(&context, [BlockArgument::new(pointer_type, span)]);
+        let pointer = block.arguments()[0].into();
 
-        block.operations_mut().push_back(load(
-            &context,
-            integer_type,
-            block.arguments()[0].into(),
-            span,
-        ));
+        block
+            .operations_mut()
+            .push_back(load(&context, integer_type, pointer, span));
     }
 
     #[test]
