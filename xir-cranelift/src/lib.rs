@@ -18,6 +18,7 @@ mod tests {
         let context = Context::new();
         let span = Span::new(&context, "", 0, 0);
         let r#type = i64_type(span);
+        let r#type = pointer_type(span);
         let mut block = Block::new(&context, [BlockArgument::new(r#type, span)]);
         let argument = block.arguments()[0].into();
 
@@ -25,6 +26,10 @@ mod tests {
             .operations_mut()
             .push_back(iconst(&context, r#type, span));
         let value = block.operations().back().unwrap().value(&context, 0);
+
+        block
+            .operations_mut()
+            .push_back(load(&context, value, argument, r#type, span));
 
         block
             .operations_mut()
