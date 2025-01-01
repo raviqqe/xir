@@ -1,4 +1,6 @@
-/// A type.
-pub enum Type {}
+use xir::{Span, Type};
 
-impl xir::Type for Type {}
+/// Creates a signed integer type.
+pub fn signed_integer_type(span: Span<'a>) -> Type {
+    Type::new("cl.i32", span)
+}

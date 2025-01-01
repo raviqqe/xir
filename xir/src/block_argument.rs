@@ -3,13 +3,13 @@ use crate::{Span, Type};
 /// An argument.
 #[derive(Clone, Copy, Debug)]
 pub struct BlockArgument<'a> {
-    r#type: Type,
+    r#type: Type<'a>,
     span: Span<'a>,
 }
 
 impl<'a> BlockArgument<'a> {
     /// Creates an argument.
-    pub const fn new(r#type: Type, span: Span<'a>) -> Self {
+    pub const fn new(r#type: Type<'a>, span: Span<'a>) -> Self {
         Self { r#type, span }
     }
 
