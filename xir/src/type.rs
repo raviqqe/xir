@@ -1,2 +1,3 @@
 /// A type.
-pub trait Type {}
+#[derive(Clone, Copy, Debug)]
+pub struct Type {}

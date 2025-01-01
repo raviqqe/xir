@@ -2,19 +2,19 @@ use crate::{Span, Type};
 
 /// An argument.
 #[derive(Clone, Copy, Debug)]
-pub struct Argument<'a, T: Type> {
-    r#type: T,
+pub struct BlockArgument<'a> {
+    r#type: Type,
     span: Span<'a>,
 }
 
-impl<'a, T: Type> Argument<'a, T> {
+impl<'a> BlockArgument<'a> {
     /// Creates an argument.
-    pub const fn new(r#type: T, span: Span<'a>) -> Self {
+    pub const fn new(r#type: Type, span: Span<'a>) -> Self {
         Self { r#type, span }
     }
 
     /// Returns an argument.
-    pub const fn r#type(&self) -> &T {
+    pub const fn r#type(&self) -> &Type {
         &self.r#type
     }
 
