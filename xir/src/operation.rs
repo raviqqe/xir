@@ -1,4 +1,4 @@
-use crate::{Allocator, Context, Type, Value};
+use crate::{Allocator, Context, Span, Type, Value};
 
 /// An operation.
 #[derive(Debug)]
@@ -6,6 +6,7 @@ pub struct Operation<'a> {
     id: &'static str,
     operands: Vec<Value<'a>, Allocator<'a>>,
     value_types: Vec<Type<'a>, Allocator<'a>>,
+    span: Span<'a>,
 }
 
 impl<'a> Operation<'a> {
@@ -15,20 +16,20 @@ impl<'a> Operation<'a> {
         id: &'static str,
         operands: [Value<'a>; N],
         value_types: [Type<'a>; M],
-    ) -> &'a Self {
+        span: Span<'a>,
+    ) -> Self {
         let mut operand_vec = Vec::new_in(context.allocator());
         let mut value_type_vec = Vec::new_in(context.allocator());
 
         operand_vec.extend(operands);
         value_type_vec.extend(value_types);
 
-        let operation = context.allocator().alloc(Operation {
+        Self {
             id,
             operands: operand_vec,
             value_types: value_type_vec,
-        });
-
-        operation
+            span,
+        }
     }
 
     /// Returns an ID.
@@ -44,5 +45,10 @@ impl<'a> Operation<'a> {
     /// Returns values.
     pub fn value_types(&self) -> &[Type<'a>] {
         &self.value_types
+    }
+
+    /// Returns a span.
+    pub fn span(&self) -> Span<'a> {
+        self.span
     }
 }
