@@ -14,3 +14,10 @@ version = "0.1.0"
 dependencies = [
  "bumpalo",
 ]
+
+[[package]]
+name = "xir-cranelift"
+version = "0.1.0"
+dependencies = [
+ "xir",
+]

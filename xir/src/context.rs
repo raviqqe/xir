@@ -1,14 +1,16 @@
+use crate::span::Span;
 use bumpalo::Bump;
 use core::cell::RefCell;
 use std::collections::HashSet;
 
-use crate::span::Span;
+/// An allocator.
+pub type Allocator<'a> = &'a Bump;
 
 /// A context.
 #[derive(Debug, Default)]
 pub struct Context<'a> {
     allocator: Bump,
-    spans: RefCell<HashSet<&'a Span<'a>>>,
+    spans: RefCell<HashSet<Span<'a>>>,
 }
 
 impl<'a> Context<'a> {
@@ -25,7 +27,7 @@ impl<'a> Context<'a> {
         &self.allocator
     }
 
-    pub(crate) const fn spans(&self) -> &RefCell<HashSet<&'a Span<'a>>> {
+    pub(crate) const fn spans(&self) -> &RefCell<HashSet<Span<'a>>> {
         &self.spans
     }
 }

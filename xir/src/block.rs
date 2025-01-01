@@ -1,35 +1,38 @@
-use crate::Operation;
+use crate::{Allocator, BlockArgument, Context, Operation};
 use alloc::collections::LinkedList;
-use core::alloc::Allocator;
 
 /// A block.
 #[derive(Debug)]
-pub struct Block<O: Operation<A>, A: Allocator> {
-    arguments: Vec<O::Type, A>,
-    operations: LinkedList<O, A>,
+pub struct Block<'a> {
+    arguments: Vec<BlockArgument<'a>, Allocator<'a>>,
+    operations: LinkedList<Operation<'a>, Allocator<'a>>,
 }
 
-impl<O: Operation<A>, A: Allocator> Block<O, A> {
+impl<'a> Block<'a> {
     /// Creates a block.
-    pub const fn new(arguments: Vec<O::Type, A>, operations: LinkedList<O, A>) -> Self {
+    pub fn new<const N: usize>(context: &'a Context, arguments: [BlockArgument<'a>; N]) -> Self {
         Self {
-            arguments,
-            operations,
+            arguments: {
+                let mut vec = Vec::new_in(context.allocator());
+                vec.extend(arguments);
+                vec
+            },
+            operations: LinkedList::new_in(context.allocator()),
         }
     }
 
     /// Returns arguments.
-    pub fn arguments(&self) -> &[O::Type] {
+    pub fn arguments(&self) -> &[BlockArgument<'a>] {
         &self.arguments
     }
 
     /// Returns a reference to operations.
-    pub const fn operations(&self) -> &LinkedList<O, A> {
+    pub const fn operations(&self) -> &LinkedList<Operation<'a>, Allocator<'a>> {
         &self.operations
     }
 
     /// Returns a mutable reference to operations.
-    pub fn operations_mut(&mut self) -> &mut LinkedList<O, A> {
+    pub fn operations_mut(&mut self) -> &mut LinkedList<Operation<'a>, Allocator<'a>> {
         &mut self.operations
     }
 }
