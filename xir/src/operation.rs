@@ -18,16 +18,18 @@ impl<'a> Operation<'a> {
         value_types: [Type<'a>; M],
         span: Span<'a>,
     ) -> Self {
-        let mut operand_vec = Vec::new_in(context.allocator());
-        let mut value_type_vec = Vec::new_in(context.allocator());
-
-        operand_vec.extend(operands);
-        value_type_vec.extend(value_types);
-
         Self {
             id,
-            operands: operand_vec,
-            value_types: value_type_vec,
+            operands: {
+                let mut vec = Vec::new_in(context.allocator());
+                vec.extend(operands);
+                vec
+            },
+            value_types: {
+                let mut vec = Vec::new_in(context.allocator());
+                vec.extend(value_types);
+                vec
+            },
             span,
         }
     }
