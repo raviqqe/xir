@@ -19,6 +19,7 @@ mod tests {
         let span = Span::new(&context, "", 0, 0);
         let r#type = i64_type(span);
         let mut block = Block::new(&context, [BlockArgument::new(r#type, span)]);
+        let argument = block.arguments()[0].into();
 
         block
             .operations_mut()
@@ -27,6 +28,6 @@ mod tests {
 
         block
             .operations_mut()
-            .push_back(iadd(&context, value, value, r#type, span));
+            .push_back(iadd(&context, value, argument, r#type, span));
     }
 }

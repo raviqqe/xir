@@ -1,4 +1,4 @@
-use crate::{Span, Type};
+use crate::{Span, Type, Value};
 
 /// An argument.
 #[derive(Clone, Copy, Debug)]
@@ -21,5 +21,11 @@ impl<'a> BlockArgument<'a> {
     /// Returns a span.
     pub const fn span(&self) -> Span<'a> {
         self.span
+    }
+}
+
+impl<'a> From<BlockArgument<'a>> for Value<'a> {
+    fn from(argument: BlockArgument<'a>) -> Self {
+        Value::BlockArgument(argument)
     }
 }
