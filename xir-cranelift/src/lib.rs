@@ -51,9 +51,13 @@ mod tests {
             .push_back(iconst(&context, integer_type, span));
         let value = block.operations().back().unwrap().value(&context, 0);
 
-        block
-            .operations_mut()
-            .push_back(iadd(&context, value, argument, integer_type, span));
+        block.operations_mut().push_back(iadd(
+            &context,
+            value,
+            block.arguments()[0].into(),
+            integer_type,
+            span,
+        ));
     }
 
     #[test]
