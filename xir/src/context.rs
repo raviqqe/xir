@@ -11,6 +11,7 @@ pub(crate) type Allocator<'a> = &'a Bump;
 pub struct Context<'a> {
     allocator: Bump,
     spans: RefCell<HashSet<Span<'a>>>,
+    symbols:
 }
 
 impl<'a> Context<'a> {
