@@ -15,5 +15,5 @@ pub fn r#while<'a>(
     after: Block<'a>,
     span: Span<'a>,
 ) -> Operation<'a> {
-    Operation::new(context, "cl.const", [], [r#type], span)
+    Operation::new(context, "cl.while", [], [r#type], span)
 }
