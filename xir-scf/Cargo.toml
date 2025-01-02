@@ -1,5 +1,6 @@
 [package]
 name = "xir-scf"
+description = "Simple control flow operations for XIR"
 version = "0.1.0"
 edition.workspace = true
 keywords.workspace = true
