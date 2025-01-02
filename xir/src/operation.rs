@@ -16,7 +16,7 @@ struct OperationInner<'a> {
 
 impl<'a> Operation<'a> {
     /// Creates an operation.
-    pub fn new<const N: usize>(
+    pub fn new(
         context: &'a Context,
         // TODO Convert this into a symbol.
         id: &'static str,
