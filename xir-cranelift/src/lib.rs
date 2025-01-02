@@ -14,7 +14,7 @@ mod tests {
     use xir::{Block, BlockArgument, Context, Span};
 
     #[test]
-    fn test() {
+    fn add_integers() {
         let context = Context::new();
         let span = Span::new(&context, "", 0, 0);
         let r#type = i64_type(span);
@@ -29,5 +29,40 @@ mod tests {
         block
             .operations_mut()
             .push_back(iadd(&context, value, argument, r#type, span));
+    }
+
+    #[test]
+    fn load_integer() {
+        let context = Context::new();
+        let span = Span::new(&context, "", 0, 0);
+        let integer_type = i64_type(span);
+        let pointer_type = super::pointer_type(span);
+        let mut block = Block::new(&context, [BlockArgument::new(pointer_type, span)]);
+        let pointer = block.arguments()[0].into();
+
+        block
+            .operations_mut()
+            .push_back(load(&context, integer_type, pointer, span));
+    }
+
+    #[test]
+    fn store_integer() {
+        let context = Context::new();
+        let span = Span::new(&context, "", 0, 0);
+        let integer_type = i64_type(span);
+        let pointer_type = super::pointer_type(span);
+        let mut block = Block::new(
+            &context,
+            [
+                BlockArgument::new(integer_type, span),
+                BlockArgument::new(pointer_type, span),
+            ],
+        );
+        let value = block.arguments()[0].into();
+        let pointer = block.arguments()[1].into();
+
+        block
+            .operations_mut()
+            .push_back(store(&context, value, pointer, span));
     }
 }
