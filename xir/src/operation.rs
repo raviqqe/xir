@@ -45,7 +45,7 @@ impl<'a> Operation<'a> {
                 vec
             },
             attributes: {
-                let mut vec = Vec::new_in(context.allocator());
+                let mut vec = LinkedList::new_in(context.allocator());
                 vec.extend(attributes);
                 vec
             },
@@ -74,7 +74,7 @@ impl<'a> Operation<'a> {
     }
 
     /// Returns attributes.
-    pub fn attributes(&self) -> &LinkedList<(Symbol, Attribute<'a>)> {
+    pub fn attributes(&self) -> &LinkedList<(Symbol, Attribute<'a>), Allocator<'a>> {
         &self.0.attributes
     }
 
