@@ -1,3 +1,5 @@
+use crate::Context;
+
 /// An attribute.
 #[derive(Clone, Copy, Debug)]
 pub enum Attribute<'a> {
@@ -11,4 +13,11 @@ pub enum Attribute<'a> {
     U64(u64),
     /// A `string` value.
     String(&'a str),
+}
+
+impl Attribute {
+    /// Creates a string.
+    pub fn string(context: &Context, string: &str) -> Self {
+        Self::String(context.allocator().alloc_str(str))
+    }
 }
