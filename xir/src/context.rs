@@ -1,6 +1,7 @@
 use crate::{Span, Symbol};
 use bumpalo::Bump;
 use core::cell::RefCell;
+use dashmap::DashMap;
 use std::collections::HashSet;
 
 /// An allocator.
@@ -20,6 +21,7 @@ impl<'a> Context<'a> {
         Self {
             allocator: Bump::new(),
             spans: Default::default(),
+            symbols: Default::default(),
         }
     }
 
