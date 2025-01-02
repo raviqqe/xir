@@ -4,6 +4,7 @@
 
 extern crate alloc;
 
+mod attribute;
 mod block;
 mod block_argument;
 mod context;
@@ -13,6 +14,7 @@ mod symbol;
 mod r#type;
 mod value;
 
+pub use attribute::*;
 pub use block::*;
 pub use block_argument::*;
 pub use context::*;
