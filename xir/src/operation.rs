@@ -22,7 +22,7 @@ impl<'a> Operation<'a> {
         id: &'static str,
         operands: &[Value<'a>],
         value_types: &[Type<'a>],
-        blocks: Vec<Block<'a>>,
+        blocks: impl IntoIterator<Item = Block<'a>>,
         span: Span<'a>,
     ) -> Self {
         Self(context.allocator().alloc(OperationInner {
