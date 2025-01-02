@@ -17,6 +17,7 @@ impl<'a> Operation<'a> {
     /// Creates an operation.
     pub fn new<const N: usize, const M: usize>(
         context: &'a Context,
+        // TODO Convert this into a symbol.
         id: &'static str,
         operands: [Value<'a>; N],
         value_types: [Type<'a>; M],
