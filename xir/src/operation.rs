@@ -1,4 +1,4 @@
-use crate::{Allocator, Block, Context, OperationValue, Span, Type, Value};
+use crate::{Allocator, Block, Context, OperationValue, Span, Symbol, Type, Value};
 
 /// An operation.
 #[derive(Clone, Copy, Debug)]
@@ -7,7 +7,7 @@ pub struct Operation<'a>(&'a OperationInner<'a>);
 /// An operation inner.
 #[derive(Debug)]
 struct OperationInner<'a> {
-    id: &'static str,
+    id: Symbol,
     operands: Vec<Value<'a>, Allocator<'a>>,
     value_types: Vec<Type<'a>, Allocator<'a>>,
     blocks: Vec<Block<'a>, Allocator<'a>>,
