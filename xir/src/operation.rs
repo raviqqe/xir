@@ -1,4 +1,4 @@
-use crate::{Allocator, Block, Context, OperationValue, Span, Type, Value};
+use crate::{Allocator, Block, Context, OperationValue, Span, Symbol, Type, Value};
 
 /// An operation.
 #[derive(Clone, Copy, Debug)]
@@ -7,7 +7,7 @@ pub struct Operation<'a>(&'a OperationInner<'a>);
 /// An operation inner.
 #[derive(Debug)]
 struct OperationInner<'a> {
-    id: &'static str,
+    id: Symbol,
     operands: Vec<Value<'a>, Allocator<'a>>,
     value_types: Vec<Type<'a>, Allocator<'a>>,
     blocks: Vec<Block<'a>, Allocator<'a>>,
@@ -18,7 +18,6 @@ impl<'a> Operation<'a> {
     /// Creates an operation.
     pub fn new(
         context: &'a Context,
-        // TODO Convert this into a symbol.
         id: &'static str,
         operands: &[Value<'a>],
         value_types: &[Type<'a>],
@@ -26,7 +25,7 @@ impl<'a> Operation<'a> {
         span: Span<'a>,
     ) -> Self {
         Self(context.allocator().alloc(OperationInner {
-            id,
+            id: Symbol::new(context, id),
             operands: {
                 let mut vec = Vec::new_in(context.allocator());
                 vec.extend(operands);
@@ -48,7 +47,7 @@ impl<'a> Operation<'a> {
 
     /// Returns an ID.
     pub const fn id(&self) -> &'static str {
-        self.0.id
+        self.0.id.name()
     }
 
     /// Returns operands.

@@ -13,6 +13,11 @@ impl Symbol {
             .or_insert_with(|| Self(name))
             .value()
     }
+
+    /// Returns a name.
+    pub const fn name(&self) -> &'static str {
+        self.0
+    }
 }
 
 impl PartialEq for Symbol {
