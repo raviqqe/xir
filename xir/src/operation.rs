@@ -12,7 +12,7 @@ struct OperationInner<'a> {
     operands: Vec<Value<'a>, Allocator<'a>>,
     value_types: Vec<Type<'a>, Allocator<'a>>,
     blocks: Vec<Block<'a>, Allocator<'a>>,
-    attributes: LinkedList<(Symbol<'a>, Attribute<'a>), Allocator<'a>>,
+    attributes: LinkedList<(Symbol, Attribute<'a>), Allocator<'a>>,
     span: Span<'a>,
 }
 
@@ -24,7 +24,7 @@ impl<'a> Operation<'a> {
         operands: &[Value<'a>],
         value_types: &[Type<'a>],
         blocks: impl IntoIterator<Item = Block<'a>>,
-        attributes: &[(Symbol<'a>, Attribute<'a>)],
+        attributes: &[(Symbol, Attribute<'a>)],
         span: Span<'a>,
     ) -> Self {
         Self(context.allocator().alloc(OperationInner {
