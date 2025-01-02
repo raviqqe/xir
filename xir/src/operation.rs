@@ -1,5 +1,5 @@
 use crate::{Allocator, Attribute, Block, Context, OperationValue, Span, Symbol, Type, Value};
-use std::collections::LinkedList;
+use std::{cell::RefCell, collections::LinkedList};
 
 /// An operation.
 #[derive(Clone, Copy, Debug)]
@@ -12,7 +12,7 @@ struct OperationInner<'a> {
     operands: Vec<Value<'a>, Allocator<'a>>,
     value_types: Vec<Type<'a>, Allocator<'a>>,
     blocks: Vec<Block<'a>, Allocator<'a>>,
-    attributes: LinkedList<(Symbol, Attribute<'a>), Allocator<'a>>,
+    attributes: RefCell<LinkedList<(Symbol, Attribute<'a>), Allocator<'a>>>,
     span: Span<'a>,
 }
 
@@ -24,7 +24,6 @@ impl<'a> Operation<'a> {
         operands: &[Value<'a>],
         value_types: &[Type<'a>],
         blocks: impl IntoIterator<Item = Block<'a>>,
-        attributes: &[(Symbol, Attribute<'a>)],
         span: Span<'a>,
     ) -> Self {
         Self(context.allocator().alloc(OperationInner {
@@ -44,11 +43,7 @@ impl<'a> Operation<'a> {
                 vec.extend(blocks);
                 vec
             },
-            attributes: {
-                let mut vec = LinkedList::new_in(context.allocator());
-                vec.extend(attributes);
-                vec
-            },
+            attributes: LinkedList::new_in(context.allocator()).into(),
             span,
         }))
     }
@@ -74,8 +69,12 @@ impl<'a> Operation<'a> {
     }
 
     /// Returns attributes.
-    pub fn attributes(&self) -> &LinkedList<(Symbol, Attribute<'a>), Allocator<'a>> {
-        &self.0.attributes
+    pub fn attribute(&self, name: Symbol) -> Option<Attribute> {
+        self.0
+            .attributes
+            .borrow()
+            .iter()
+            .find_map(|&(key, value)| (key == name).then_some(value))
     }
 
     /// Returns a span.
