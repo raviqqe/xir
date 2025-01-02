@@ -1,13 +1,17 @@
 use crate::Context;
 
 /// A symbol.
-#[derive(Debug, Eq)]
+#[derive(Clone, Copy, Debug, Eq)]
 pub struct Symbol(&'static str);
 
 impl Symbol {
     /// Creates a symbol.
     pub fn new(context: &Context, name: &'static str) -> Self {
-        Self(name)
+        *context
+            .symbols()
+            .entry(name)
+            .or_insert_with(|| Self(name))
+            .value()
     }
 }
 
