@@ -1,4 +1,4 @@
-use crate::{Allocator, Context, OperationValue, Span, Type, Value};
+use crate::{Allocator, Block, Context, OperationValue, Span, Type, Value};
 
 /// An operation.
 #[derive(Clone, Copy, Debug)]
@@ -10,17 +10,19 @@ struct OperationInner<'a> {
     id: &'static str,
     operands: Vec<Value<'a>, Allocator<'a>>,
     value_types: Vec<Type<'a>, Allocator<'a>>,
+    blocks: Vec<Block<'a>, Allocator<'a>>,
     span: Span<'a>,
 }
 
 impl<'a> Operation<'a> {
     /// Creates an operation.
-    pub fn new<const N: usize, const M: usize>(
+    pub fn new<const N: usize>(
         context: &'a Context,
         // TODO Convert this into a symbol.
         id: &'static str,
-        operands: [Value<'a>; N],
-        value_types: [Type<'a>; M],
+        operands: &[Value<'a>],
+        value_types: &[Type<'a>],
+        blocks: Vec<Block<'a>>,
         span: Span<'a>,
     ) -> Self {
         Self(context.allocator().alloc(OperationInner {
@@ -33,6 +35,11 @@ impl<'a> Operation<'a> {
             value_types: {
                 let mut vec = Vec::new_in(context.allocator());
                 vec.extend(value_types);
+                vec
+            },
+            blocks: {
+                let mut vec = Vec::new_in(context.allocator());
+                vec.extend(blocks);
                 vec
             },
             span,
@@ -52,6 +59,11 @@ impl<'a> Operation<'a> {
     /// Returns values.
     pub fn value_types(&self) -> &[Type<'a>] {
         &self.0.value_types
+    }
+
+    /// Returns blocks.
+    pub fn blocks(&self) -> &[Block<'a>] {
+        &self.0.blocks
     }
 
     /// Returns a span.
