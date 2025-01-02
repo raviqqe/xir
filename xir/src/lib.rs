@@ -9,6 +9,7 @@ mod block_argument;
 mod context;
 mod operation;
 mod span;
+mod symbol;
 mod r#type;
 mod value;
 
@@ -18,4 +19,5 @@ pub use context::*;
 pub use operation::*;
 pub use r#type::*;
 pub use span::*;
+pub use symbol::*;
 pub use value::*;
