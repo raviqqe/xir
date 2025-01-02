@@ -15,7 +15,7 @@ impl Symbol {
     }
 
     /// Returns a name.
-    pub fn name(&self) -> &'static str {
+    pub const fn name(&self) -> &'static str {
         self.0
     }
 }
