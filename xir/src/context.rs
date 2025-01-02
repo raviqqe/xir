@@ -1,6 +1,7 @@
-use crate::span::Span;
+use crate::{Span, Symbol};
 use bumpalo::Bump;
 use core::cell::RefCell;
+use dashmap::DashMap;
 use std::collections::HashSet;
 
 /// An allocator.
@@ -11,6 +12,7 @@ pub(crate) type Allocator<'a> = &'a Bump;
 pub struct Context<'a> {
     allocator: Bump,
     spans: RefCell<HashSet<Span<'a>>>,
+    symbols: DashMap<&'static str, Symbol>,
 }
 
 impl<'a> Context<'a> {
@@ -19,6 +21,7 @@ impl<'a> Context<'a> {
         Self {
             allocator: Bump::new(),
             spans: Default::default(),
+            symbols: Default::default(),
         }
     }
 
@@ -29,5 +32,9 @@ impl<'a> Context<'a> {
 
     pub(crate) const fn spans(&self) -> &RefCell<HashSet<Span<'a>>> {
         &self.spans
+    }
+
+    pub(crate) const fn symbols(&self) -> &DashMap<&'static str, Symbol> {
+        &self.symbols
     }
 }
