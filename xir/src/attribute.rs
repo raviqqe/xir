@@ -7,12 +7,12 @@ pub enum Attribute<'a> {
     I32(i32),
     /// An `i64` value.
     I64(i64),
+    /// A `string` value.
+    String(&'a str),
     /// A `u32` value.
     U32(u32),
     /// A `u64` value.
     U64(u64),
-    /// A `string` value.
-    String(&'a str),
 }
 
 impl<'a> Attribute<'a> {
