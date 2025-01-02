@@ -1,0 +1,15 @@
+[package]
+name = "xir-scf"
+description = "Simple control flow operations for XIR"
+version = "0.1.0"
+edition.workspace = true
+keywords.workspace = true
+license-file.workspace = true
+readme.workspace = true
+repository.workspace = true
+
+[dependencies]
+xir = { version = "0.1.1", path = "../xir" }
+
+[lints]
+workspace = true

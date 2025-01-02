@@ -21,3 +21,10 @@ version = "0.1.1"
 dependencies = [
  "xir",
 ]
+
+[[package]]
+name = "xir-scf"
+version = "0.1.0"
+dependencies = [
+ "xir",
+]

@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["xir", "xir-cranelift"]
+members = ["xir", "xir-cranelift", "xir-scf"]
 
 [workspace.package]
 edition = "2021"
