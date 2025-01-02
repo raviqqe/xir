@@ -77,6 +77,21 @@ impl<'a> Operation<'a> {
             .find_map(|&(key, value)| (key == name).then_some(value))
     }
 
+    /// Returns attributes.
+    pub fn insert_attribute(
+        self,
+        context: &'a Context<'a>,
+        name: &'static str,
+        attribute: Attribute<'a>,
+    ) -> Self {
+        self.0
+            .attributes
+            .borrow_mut()
+            .push_front((Symbol::new(context, name), attribute));
+
+        self
+    }
+
     /// Returns a span.
     pub const fn span(&self) -> Span<'a> {
         self.0.span
