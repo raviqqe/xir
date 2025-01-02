@@ -1,4 +1,5 @@
-use crate::{Allocator, Block, Context, OperationValue, Span, Symbol, Type, Value};
+use crate::{Allocator, Attribute, Block, Context, OperationValue, Span, Symbol, Type, Value};
+use std::collections::LinkedList;
 
 /// An operation.
 #[derive(Clone, Copy, Debug)]
@@ -11,6 +12,7 @@ struct OperationInner<'a> {
     operands: Vec<Value<'a>, Allocator<'a>>,
     value_types: Vec<Type<'a>, Allocator<'a>>,
     blocks: Vec<Block<'a>, Allocator<'a>>,
+    attributes: LinkedList<(Symbol<'a>, Attribute<'a>), Allocator<'a>>,
     span: Span<'a>,
 }
 
@@ -22,6 +24,7 @@ impl<'a> Operation<'a> {
         operands: &[Value<'a>],
         value_types: &[Type<'a>],
         blocks: impl IntoIterator<Item = Block<'a>>,
+        attributes: &[(Symbol<'a>, Attribute<'a>)],
         span: Span<'a>,
     ) -> Self {
         Self(context.allocator().alloc(OperationInner {
@@ -39,6 +42,11 @@ impl<'a> Operation<'a> {
             blocks: {
                 let mut vec = Vec::new_in(context.allocator());
                 vec.extend(blocks);
+                vec
+            },
+            attributes: {
+                let mut vec = Vec::new_in(context.allocator());
+                vec.extend(attributes);
                 vec
             },
             span,
@@ -63,6 +71,11 @@ impl<'a> Operation<'a> {
     /// Returns blocks.
     pub fn blocks(&self) -> &[Block<'a>] {
         &self.0.blocks
+    }
+
+    /// Returns attributes.
+    pub fn attributes(&self) -> &LinkedList<(Symbol, Attribute<'a>)> {
+        &self.0.attributes
     }
 
     /// Returns a span.
