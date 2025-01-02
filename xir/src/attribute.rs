@@ -16,8 +16,8 @@ pub enum Attribute<'a> {
 }
 
 impl<'a> Attribute<'a> {
-    /// Creates a string.
-    pub fn string(context: &Context, string: &str) -> Self {
-        Self::String(context.allocator().alloc_str(str))
+    /// Creates a string attribute.
+    pub fn string(context: &'a Context, string: &str) -> Self {
+        Self::String(context.allocator().alloc_str(string))
     }
 }
