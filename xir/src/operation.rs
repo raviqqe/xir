@@ -114,6 +114,8 @@ mod tests {
         let operation =
             Operation::new(&context, "foo", &[], &[], [], Span::new(&context, "", 0, 0));
 
+        assert_eq!(operation.attribute(Symbol::new(&context, "bar")), None);
+
         operation.insert_attribute(&context, "bar", Attribute::I64(0));
 
         assert_eq!(
