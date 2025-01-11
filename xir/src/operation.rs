@@ -1,6 +1,6 @@
 use crate::{Allocator, Attribute, Block, Context, OperationValue, Span, Symbol, Type, Value};
+use alloc::collections::LinkedList;
 use core::cell::RefCell;
-use std::collections::LinkedList;
 
 /// An operation.
 #[derive(Clone, Copy, Debug)]
