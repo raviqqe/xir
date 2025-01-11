@@ -19,6 +19,7 @@ impl<'a> Context<'a> {
     /// Creates a context.
     pub fn new() -> Self {
         Self {
+            // TODO Split allocators by types.
             allocator: Bump::new(),
             spans: Default::default(),
             symbols: Default::default(),
