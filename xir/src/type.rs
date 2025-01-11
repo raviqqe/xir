@@ -1,4 +1,4 @@
-use crate::{Span, Symbol};
+use crate::{Allocator, Span, Symbol};
 
 /// A type.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -12,8 +12,8 @@ pub struct Type<'a> {
 pub enum TypeBody<'a> {
     Bool,
     Function {
-        arguments: &[Type],
-        returns: &[Type],
+        arguments: &'a [Type<'a>],
+        returns: &'a [Type<'a>],
     },
     I16,
     I32,
