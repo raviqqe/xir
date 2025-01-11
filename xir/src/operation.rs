@@ -103,3 +103,22 @@ impl<'a> Operation<'a> {
         OperationValue::new(context, self, index).into()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn insert_attribute() {
+        let context = Context::new();
+        let operation =
+            Operation::new(&context, "foo", &[], &[], [], Span::new(&context, "", 0, 0));
+
+        operation.insert_attribute(&context, "bar", Attribute::I64(0));
+
+        assert_eq!(
+            operation.attribute(Symbol::new(&context, "bar")),
+            Some(Attribute::I64(0))
+        );
+    }
+}
