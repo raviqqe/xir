@@ -11,7 +11,10 @@ pub struct Type<'a> {
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum TypeBody<'a> {
     Bool,
-    Function(Symbol<'a>, &'a Type<'a>),
+    Function {
+        arguments: &[Type],
+        returns: &[Type],
+    },
     I16,
     I32,
     I64,
