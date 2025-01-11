@@ -23,7 +23,7 @@ mod tests {
 
         block
             .operations_mut()
-            .push_back(iconst(&context, r#type, Attribute::I64(0), span));
+            .push_back(iconst(&context, r#type, Attribute::I64(42), span));
         let value = block.operations().back().unwrap().value(&context, 0);
 
         block
