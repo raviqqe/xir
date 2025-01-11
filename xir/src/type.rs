@@ -3,8 +3,8 @@ use crate::Span;
 /// A type.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum Type<'a> {
-    Named (  Symbol<'a>,  &'a Type<'a>, span: Span<'a> ),
-    I64 (   span: Span<'a> ),
+    Named(Symbol<'a>, &'a Type<'a>, Span<'a>),
+    I64(Span<'a>),
 }
 
 impl<'a> Type<'a> {
