@@ -11,7 +11,7 @@ pub use r#type::*;
 #[cfg(test)]
 mod tests {
     use super::*;
-    use xir::{Block, BlockArgument, Context, Span};
+    use xir::{Attribute, Block, BlockArgument, Context, Span};
 
     #[test]
     fn add_integers() {
@@ -23,7 +23,7 @@ mod tests {
 
         block
             .operations_mut()
-            .push_back(iconst(&context, r#type, span));
+            .push_back(iconst(&context, r#type, Attribute::I64(42), span));
         let value = block.operations().back().unwrap().value(&context, 0);
 
         block

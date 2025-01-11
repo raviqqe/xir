@@ -1,4 +1,6 @@
-use crate::{Allocator, Block, Context, OperationValue, Span, Symbol, Type, Value};
+use crate::{Allocator, Attribute, Block, Context, OperationValue, Span, Symbol, Type, Value};
+use alloc::collections::LinkedList;
+use core::cell::RefCell;
 
 /// An operation.
 #[derive(Clone, Copy, Debug)]
@@ -11,6 +13,7 @@ struct OperationInner<'a> {
     operands: Vec<Value<'a>, Allocator<'a>>,
     value_types: Vec<Type<'a>, Allocator<'a>>,
     blocks: Vec<Block<'a>, Allocator<'a>>,
+    attributes: RefCell<LinkedList<(Symbol, Attribute<'a>), Allocator<'a>>>,
     span: Span<'a>,
 }
 
@@ -41,6 +44,7 @@ impl<'a> Operation<'a> {
                 vec.extend(blocks);
                 vec
             },
+            attributes: LinkedList::new_in(context.allocator()).into(),
             span,
         }))
     }
@@ -63,6 +67,30 @@ impl<'a> Operation<'a> {
     /// Returns blocks.
     pub fn blocks(&self) -> &[Block<'a>] {
         &self.0.blocks
+    }
+
+    /// Returns attributes.
+    pub fn attribute(&self, name: Symbol) -> Option<Attribute> {
+        self.0
+            .attributes
+            .borrow()
+            .iter()
+            .find_map(|&(key, value)| (key == name).then_some(value))
+    }
+
+    /// Returns attributes.
+    pub fn insert_attribute(
+        self,
+        context: &'a Context<'a>,
+        name: &'static str,
+        attribute: Attribute<'a>,
+    ) -> Self {
+        self.0
+            .attributes
+            .borrow_mut()
+            .push_front((Symbol::new(context, name), attribute));
+
+        self
     }
 
     /// Returns a span.
