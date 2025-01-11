@@ -1,12 +1,14 @@
 use xir::{Attribute, Context, Operation, Span, Type, Value};
 
 /// Creates a `iconst` operation.
-pub fn iconst<'a>(context: &'a Context<'a>, r#type: Type<'a>, span: Span<'a>) -> Operation<'a> {
-    Operation::new(context, "cl.const", &[], &[r#type], [], span).insert_attribute(
-        context,
-        "value",
-        Attribute::I64(0),
-    )
+pub fn iconst<'a>(
+    context: &'a Context<'a>,
+    r#type: Type<'a>,
+    value: Attribute<'a>,
+    span: Span<'a>,
+) -> Operation<'a> {
+    Operation::new(context, "cl.const", &[], &[r#type], [], span)
+        .insert_attribute(context, "value", value)
 }
 
 /// Creates an `iadd` operation.
