@@ -6,7 +6,7 @@ pub struct Type<'a> {
     span: Span<'a>,
 }
 
-pub enum TypeContent<'a> {
+pub enum TypeShape<'a> {
     Named(Symbol<'a>, &'a Type<'a>, Span<'a>),
     I64,
 }
