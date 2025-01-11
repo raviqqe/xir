@@ -10,16 +10,25 @@ pub struct Type<'a> {
 /// A type body.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum TypeBody<'a> {
+    /// A boolean.
     Bool,
+    /// A function.
     Function {
+        /// Arguments.
         arguments: &'a [Type<'a>],
+        /// Returned values.
         returns: &'a [Type<'a>],
     },
+    /// A 16-bit integer.
     I16,
+    /// A 32-bit integer.
     I32,
+    /// A 64-bit integer.
     I64,
-    Named(Symbol<'a>, &'a Type<'a>),
-    Tuple(Symbol<'a>, &'a Type<'a>),
+    /// A named type.
+    Named(Symbol, &'a Type<'a>),
+    /// A tuple.
+    Tuple(&'a [Type<'a>]),
 }
 
 impl<'a> Type<'a> {
@@ -30,7 +39,7 @@ impl<'a> Type<'a> {
 
     /// Returns an ID.
     pub const fn body(&self) -> TypeBody {
-        self.id
+        self.body
     }
 
     /// Returns a span.
