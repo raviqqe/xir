@@ -1,7 +1,7 @@
 use crate::Context;
 
 /// An attribute.
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum Attribute<'a> {
     /// An `i32` value.
     I32(i32),
