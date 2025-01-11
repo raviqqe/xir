@@ -1,4 +1,4 @@
-use crate::{Allocator, Span, Symbol};
+use crate::{Span, Symbol};
 
 /// A type.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
@@ -27,6 +27,8 @@ pub enum TypeBody<'a> {
     I64,
     /// A named type.
     Named(Symbol, &'a Type<'a>),
+    /// A pointer.
+    Pointer,
     /// A tuple.
     Tuple(&'a [Type<'a>]),
 }
