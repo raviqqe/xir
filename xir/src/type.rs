@@ -2,9 +2,13 @@ use crate::Span;
 
 /// A type.
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
-pub enum Type<'a> {
+pub struct Type<'a> {
+    span: Span<'a>,
+}
+
+pub enum TypeContent<'a> {
     Named(Symbol<'a>, &'a Type<'a>, Span<'a>),
-    I64(Span<'a>),
+    I64,
 }
 
 impl<'a> Type<'a> {
