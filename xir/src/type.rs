@@ -6,7 +6,9 @@ pub struct Type<'a> {
     span: Span<'a>,
 }
 
-pub enum TypeShape<'a> {
+/// A type body.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum TypeBody<'a> {
     Named(Symbol<'a>, &'a Type<'a>, Span<'a>),
     I64,
 }
@@ -18,7 +20,7 @@ impl<'a> Type<'a> {
     }
 
     /// Returns an ID.
-    pub const fn id(&self) -> &'static str {
+    pub const fn body(&self) -> TypeBody {
         self.id
     }
 
