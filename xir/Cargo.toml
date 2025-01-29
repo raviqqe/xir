@@ -9,7 +9,7 @@ readme.workspace = true
 repository.workspace = true
 
 [dependencies]
-bumpalo = { version = "3.16.0", features = ["allocator_api"] }
+bumpalo = { version = "3.17.0", features = ["allocator_api"] }
 dashmap = "6.1.0"
 
 [lints]
