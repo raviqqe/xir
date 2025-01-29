@@ -50,7 +50,7 @@ impl<'a> Operation<'a> {
     }
 
     /// Returns an ID.
-    pub const fn id(&self) -> &'static str {
+    pub fn id(&self) -> &'static str {
         self.0.id.name()
     }
 
@@ -94,7 +94,7 @@ impl<'a> Operation<'a> {
     }
 
     /// Returns a span.
-    pub const fn span(&self) -> Span<'a> {
+    pub fn span(&self) -> Span<'a> {
         self.0.span
     }
 
