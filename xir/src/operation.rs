@@ -70,7 +70,7 @@ impl<'a> Operation<'a> {
     }
 
     /// Returns attributes.
-    pub fn attribute(&self, name: Symbol) -> Option<Attribute> {
+    pub fn attribute(&self, name: Symbol) -> Option<Attribute<'_>> {
         self.0
             .attributes
             .borrow()

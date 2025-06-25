@@ -27,7 +27,7 @@ impl<'a> Context<'a> {
     }
 
     /// Returns an allocator.
-    pub(crate) const fn allocator(&self) -> Allocator {
+    pub(crate) const fn allocator(&self) -> Allocator<'_> {
         &self.allocator
     }
 

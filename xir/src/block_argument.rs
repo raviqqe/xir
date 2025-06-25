@@ -14,7 +14,7 @@ impl<'a> BlockArgument<'a> {
     }
 
     /// Returns an argument.
-    pub const fn r#type(&self) -> &Type {
+    pub const fn r#type(&self) -> &Type<'_> {
         &self.r#type
     }
 
