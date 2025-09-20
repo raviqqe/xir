@@ -1,6 +1,6 @@
 [package]
 name = "xir"
-version = "0.1.2"
+version.workspace = true
 edition.workspace = true
 description = "Blah-blah intermediate representation"
 readme.workspace = true

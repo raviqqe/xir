@@ -1,8 +1,8 @@
 [package]
 name = "xir-cranelift"
-version = "0.1.2"
+version.workspace = true
 edition.workspace = true
-description = "Cranelift intermediate represesntation for XIR"
+description = "Cranelift intermediate representation for XIR"
 readme.workspace = true
 repository.workspace = true
 license-file.workspace = true

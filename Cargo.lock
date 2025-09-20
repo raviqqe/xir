@@ -174,7 +174,7 @@ checksum = "589f6da84c646204747d1270a2a5661ea66ed1cced2631d546fdfb155959f9ec"
 
 [[package]]
 name = "xir"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "bumpalo",
  "dashmap",
@@ -182,14 +182,14 @@ dependencies = [
 
 [[package]]
 name = "xir-cranelift"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "xir",
 ]
 
 [[package]]
 name = "xir-scf"
-version = "0.1.1"
+version = "0.1.3"
 dependencies = [
  "xir",
 ]
