@@ -1,12 +1,12 @@
 [package]
 name = "xir"
-description = "Blah-blah intermediate representation"
-version = "0.1.1"
+version = "0.1.2"
 edition.workspace = true
-keywords.workspace = true
-license-file.workspace = true
+description = "Blah-blah intermediate representation"
 readme.workspace = true
 repository.workspace = true
+license-file.workspace = true
+keywords.workspace = true
 
 [dependencies]
 bumpalo = { version = "3.19.0", features = ["allocator_api"] }

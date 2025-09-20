@@ -1,17 +1,13 @@
 [workspace]
-resolver = "2"
+resolver = "3"
 members = ["xir", "xir-cranelift", "xir-scf"]
 
 [workspace.package]
 edition = "2021"
-keywords = ["language"]
-license-file = "LICENSE"
 readme = "README.md"
 repository = "https://github.com/raviqqe/xir"
-
-[workspace.lints.rust]
-missing_docs = "deny"
-warnings = "deny"
+license-file = "LICENSE"
+keywords = ["language"]
 
 [workspace.lints.clippy]
 alloc_instead_of_core = "deny"
@@ -31,3 +27,7 @@ unimplemented = "deny"
 uninlined_format_args = "deny"
 unused_self = "deny"
 use_self = "deny"
+
+[workspace.lints.rust]
+missing_docs = "deny"
+warnings = "deny"
