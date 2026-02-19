@@ -9,7 +9,7 @@ license-file.workspace = true
 keywords.workspace = true
 
 [dependencies]
-bumpalo = { version = "3.19.1", features = ["allocator_api"] }
+bumpalo = { version = "3.20.1", features = ["allocator_api"] }
 dashmap = "6.1.0"
 
 [lints]
