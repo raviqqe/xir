@@ -1,6 +1,6 @@
 //! Blah-blah intermediate representation.
 
-#![feature(allocator_api)]
+#![feature(allocator_ext)]
 
 extern crate alloc;
 
