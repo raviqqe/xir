@@ -1,5 +1,7 @@
 //! Blah-blah intermediate representation.
 
+#![feature(allocator_ext)]
+
 extern crate alloc;
 
 mod attribute;
