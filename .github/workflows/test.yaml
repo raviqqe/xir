@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: raviqqe/cargo-cache@v1.0.4
-      - uses: bnjbvr/cargo-machete@v0.9.2
+      - uses: bnjbvr/cargo-machete@v0.10.0
   readme:
     runs-on: ubuntu-latest
     steps:
